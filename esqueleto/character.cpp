@@ -4,6 +4,12 @@
 
 #include <params.h>
 
+USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle)
+{
+	return USVec2D(cos(_fAngle) * _vInitialVector.mX - sin(_fAngle) * _vInitialVector.mY, sin(_fAngle) * _vInitialVector.mX + cos(_fAngle) * _vInitialVector.mY);
+}
+
+
 Character::Character() : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
 {
 	RTTI_BEGIN
@@ -28,16 +34,19 @@ void Character::OnStop()
 
 void Character::OnUpdate(float step)
 {
+	USVec2D vAcceleration = USVec2D(0, 100);
+	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
+	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
+	SetLoc(GetLoc() + GetLinearVelocity()*step);
 }
 
 void Character::DrawDebug()
 {
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
 	gfxDevice.SetPenColor(0.0f, 0.0f, 1.0f, 0.5f);
-
-	//MOAIDraw::DrawPoint(0.0f, 0.0f);
+	
+	//MOAIDraw::DrawLine(USVec2D(0, 0), GetLinearVelocity());
 }
-
 
 
 

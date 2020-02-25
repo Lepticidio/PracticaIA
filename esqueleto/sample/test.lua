@@ -14,7 +14,7 @@ gfxQuad:setTexture(texture_name)
 char_size = 64
 gfxQuad:setRect(-char_size/2, -char_size/2, char_size/2, char_size/2)
 gfxQuad:setUVRect(0, 0, 1, 1)
-  
+
 prop = MOAIProp2D.new()
 prop:setDeck(gfxQuad)
 
@@ -24,8 +24,8 @@ entity:setProp(prop, layer)
 -- Start the character (allow calls to OnUpdate)
 entity:start()
 entity:setLoc(0, 0)
-entity:setRot(-135)
---entity:setLinearVel(10, 20)
+entity:setRot(0)
+entity:setLinearVel(100, 0)
 --entity:setAngularVel(30)
 
 -- Enable Debug Draw
@@ -39,7 +39,7 @@ mouseY = 0
 
 function onClick(down)
   entity:setLoc(mouseX, mouseY)
-  entity:setRot(-135)
+  entity:setRot(0)
 end
 
 function pointerCallback(x, y)
