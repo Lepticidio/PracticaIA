@@ -3,6 +3,7 @@
 #include <tinyxml.h>
 
 #include <params.h>
+#include "SeekSteering.h"
 
 USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle)
 {
@@ -13,8 +14,10 @@ USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle)
 Character::Character() : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
 {
 	RTTI_BEGIN
-		RTTI_EXTEND (MOAIEntity2D)
-	RTTI_END
+		RTTI_EXTEND(MOAIEntity2D)
+		RTTI_END
+
+		m_pSteering = new SeekSteering(this);
 }
 
 Character::~Character()
@@ -34,17 +37,20 @@ void Character::OnStop()
 
 void Character::OnUpdate(float step)
 {
-	USVec2D vAcceleration = USVec2D(0, 100);
+	USVec2D vAcceleration = m_pSteering->GetSteering(USVec2D(0, 250)); ;
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
 	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
 	SetLoc(GetLoc() + GetLinearVelocity()*step);
+	mParams.max_velocity;
+
+
 }
 
 void Character::DrawDebug()
 {
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
 	gfxDevice.SetPenColor(0.0f, 0.0f, 1.0f, 0.5f);
-	
+	m_pSteering->DrawDebug();
 	//MOAIDraw::DrawLine(USVec2D(0, 0), GetLinearVelocity());
 }
 

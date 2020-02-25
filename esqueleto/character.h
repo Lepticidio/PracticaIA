@@ -3,7 +3,7 @@
 
 #include <moaicore/MOAIEntity2D.h>
 #include <params.h>
-
+class SeekSteering;
 class Character: public MOAIEntity2D
 {
 public:
@@ -28,6 +28,8 @@ private:
 	float mAngularVelocity;
 	
 	Params mParams;
+
+	SeekSteering* m_pSteering;
 	
 	// Lua configuration
 public:
