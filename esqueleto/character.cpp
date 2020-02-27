@@ -28,6 +28,7 @@ Character::~Character()
 void Character::OnStart()
 {
     ReadParams("params.xml", mParams);
+	m_pSteering->m_fMaxAcceleration = mParams.max_acceleration;
 }
 
 void Character::OnStop()
@@ -37,21 +38,20 @@ void Character::OnStop()
 
 void Character::OnUpdate(float step)
 {
-	USVec2D vAcceleration = m_pSteering->GetSteering(USVec2D(0, 250)); ;
+	USVec2D vAcceleration = m_pSteering->GetSteering(mParams.targetPosition); 
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
+	vCurrentVelocity.SetLength(mParams.max_velocity);
 	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
 	SetLoc(GetLoc() + GetLinearVelocity()*step);
-	mParams.max_velocity;
-
 
 }
 
 void Character::DrawDebug()
 {
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
-	gfxDevice.SetPenColor(0.0f, 0.0f, 1.0f, 0.5f);
 	m_pSteering->DrawDebug();
-	//MOAIDraw::DrawLine(USVec2D(0, 0), GetLinearVelocity());
+	gfxDevice.SetPenColor(1.0f, 1.0f, 0.0f, 0.5f);
+	MOAIDraw::DrawLine(GetLoc(), GetLoc() + GetLinearVelocity());
 }
 
 
