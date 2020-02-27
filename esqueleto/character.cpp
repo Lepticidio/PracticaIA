@@ -5,7 +5,7 @@
 #include <params.h>
 #include "SeekSteering.h"
 #include "ArriveSteering.h"
-#include "AlignSteering.h"
+#include "AlignToMovement.h"
 
 USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle)
 {
@@ -21,6 +21,7 @@ Character::Character() : mLinearVelocity(00.0f, 0.0f), mAngularVelocity(0.0f)
 		m_pSeek = new SeekSteering(this);
 		m_pArrive = new ArriveSteering(this);
 		m_pAlign = new AlignSteering(this);
+		m_pAlignToMovement = new AlignToMovement(this, m_pAlign);
 }
 
 Character::~Character()
@@ -44,13 +45,14 @@ void Character::OnStop()
 void Character::OnUpdate(float step)
 {
 	//USVec2D vAcceleration = m_pSeek->GetSteering(mParams.targetPosition); 
-	//USVec2D vAcceleration = m_pArrive->GetSteering(mParams.targetPosition);
-	USVec2D vAcceleration (0,0);
+	USVec2D vAcceleration = m_pArrive->GetSteering(mParams.targetPosition);
+	//USVec2D vAcceleration (0,0);
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
 	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
 	SetLoc(GetLoc() + GetLinearVelocity()*step);
 
-	float fAngularAcceleration = m_pAlign->GetSteering(mParams.targetRotation);
+	//float fAngularAcceleration = m_pAlign->GetSteering(mParams.targetRotation);
+	float fAngularAcceleration = m_pAlignToMovement->GetSteering();
 	//float fAngularAcceleration = 0;
 	float fCurrentAngularVelocity = GetAngularVelocity() + fAngularAcceleration;
 	SetAngularVelocity(fCurrentAngularVelocity);

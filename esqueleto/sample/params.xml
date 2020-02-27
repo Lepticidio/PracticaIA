@@ -5,6 +5,7 @@
 		<dest_radius value="0"> </dest_radius>
 		<arrive_radius value="200"> </arrive_radius>
 		<targetPosition x="200" y="200"> </targetPosition>
+		
 		<max_angular_velocity value="10"> </max_angular_velocity>
 		<max_angular_acceleration value="1"> </max_angular_acceleration>
 		<angular_dest_radius value="0"> </angular_dest_radius>

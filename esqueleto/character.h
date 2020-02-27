@@ -6,6 +6,7 @@
 class SeekSteering;
 class ArriveSteering;
 class AlignSteering;
+class AlignToMovement;
 class Character: public MOAIEntity2D
 {
 public:
@@ -34,6 +35,7 @@ private:
 	SeekSteering* m_pSeek;
 	ArriveSteering* m_pArrive;
 	AlignSteering* m_pAlign;
+	AlignToMovement* m_pAlignToMovement;
 	
 	// Lua configuration
 public:
