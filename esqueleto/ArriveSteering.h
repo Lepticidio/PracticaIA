@@ -1,12 +1,10 @@
 #pragma once
-
 #include <stdafx.h>
 #include "character.h"
 #include <tinyxml.h>
 
 #include <params.h>
-
-class SeekSteering
+class ArriveSteering
 {
 	USVec2D m_vDesiredSpeed = USVec2D(0, 0);
 	USVec2D m_vCurrentAcceleration = USVec2D(0, 0);
@@ -14,10 +12,9 @@ class SeekSteering
 public:
 	float m_fMaxAcceleration;
 	float m_fMaxSpeed;
-	SeekSteering(Character* _pCharacter);
+	ArriveSteering(Character* _pCharacter);
 	USVec2D GetSteering(USVec2D _vTarget);
 	void DrawDebug();
 	void Initialize();
-
 };
 

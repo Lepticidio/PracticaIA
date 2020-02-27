@@ -4,6 +4,7 @@
 #include <moaicore/MOAIEntity2D.h>
 #include <params.h>
 class SeekSteering;
+class ArriveSteering;
 class Character: public MOAIEntity2D
 {
 public:
@@ -29,11 +30,13 @@ private:
 	
 	Params mParams;
 
-	SeekSteering* m_pSteering;
+	SeekSteering* m_pSeek;
+	ArriveSteering* m_pArrive;
 	
 	// Lua configuration
 public:
 	virtual void RegisterLuaFuncs(MOAILuaState& state);
+	inline Params GetParams() { return mParams; };
 private:
 	static int _setLinearVel(lua_State* L);
 	static int _setAngularVel(lua_State* L);

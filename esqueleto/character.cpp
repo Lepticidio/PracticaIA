@@ -4,6 +4,7 @@
 
 #include <params.h>
 #include "SeekSteering.h"
+#include "ArriveSteering.h"
 
 USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle)
 {
@@ -16,8 +17,8 @@ Character::Character() : mLinearVelocity(200.0f, 0.0f), mAngularVelocity(0.0f)
 	RTTI_BEGIN
 		RTTI_EXTEND(MOAIEntity2D)
 		RTTI_END
-
-		m_pSteering = new SeekSteering(this);
+		m_pSeek = new SeekSteering(this);
+		m_pArrive = new ArriveSteering(this);
 }
 
 Character::~Character()
@@ -28,7 +29,8 @@ Character::~Character()
 void Character::OnStart()
 {
     ReadParams("params.xml", mParams);
-	m_pSteering->m_fMaxAcceleration = mParams.max_acceleration;
+	m_pSeek->Initialize();
+	m_pArrive->Initialize();
 }
 
 void Character::OnStop()
@@ -38,16 +40,9 @@ void Character::OnStop()
 
 void Character::OnUpdate(float step)
 {
-	USVec2D vAcceleration = m_pSteering->GetSteering(mParams.targetPosition); 
+	//USVec2D vAcceleration = m_pSeek->GetSteering(mParams.targetPosition); 
+	USVec2D vAcceleration = m_pArrive->GetSteering(mParams.targetPosition);
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
-	float fDistance = (GetLoc() - mParams.targetPosition).Length();
-
-	float fDistanceFactor = 1;
-	if (fDistance < mParams.arrive_radius)
-	{
-		fDistanceFactor = fDistance / mParams.arrive_radius;
-	}
-	vCurrentVelocity.SetLength(mParams.max_velocity*fDistanceFactor);
 	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
 	SetLoc(GetLoc() + GetLinearVelocity()*step);
 
@@ -56,7 +51,7 @@ void Character::OnUpdate(float step)
 void Character::DrawDebug()
 {
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
-	m_pSteering->DrawDebug();
+	m_pArrive->DrawDebug();
 	gfxDevice.SetPenColor(1.0f, 1.0f, 0.0f, 0.5f);
 	MOAIDraw::DrawLine(GetLoc(), GetLoc() + GetLinearVelocity());
 }
