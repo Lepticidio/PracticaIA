@@ -5,6 +5,7 @@
 #include <params.h>
 class SeekSteering;
 class ArriveSteering;
+class AlignSteering;
 class Character: public MOAIEntity2D
 {
 public:
@@ -32,6 +33,7 @@ private:
 
 	SeekSteering* m_pSeek;
 	ArriveSteering* m_pArrive;
+	AlignSteering* m_pAlign;
 	
 	// Lua configuration
 public:

@@ -25,7 +25,7 @@ entity:setProp(prop, layer)
 entity:start()
 entity:setLoc(0, 0)
 entity:setRot(0)
-entity:setLinearVel(100, 0)
+entity:setLinearVel(0, 0)
 --entity:setAngularVel(30)
 
 -- Enable Debug Draw

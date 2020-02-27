@@ -7,7 +7,7 @@ USVec2D ArriveSteering::GetSteering(USVec2D _vTarget)
 	USVec2D vCurrentPos = m_pChararacter->GetLoc();
 
 	m_vDesiredSpeed = _vTarget - vCurrentPos;
-	float fDistance = (vCurrentPos - m_pChararacter->GetParams().targetPosition).Length();
+	float fDistance = (vCurrentPos - _vTarget).Length();
 	float fDistanceFactor = 1;
 
 	if (fDistance < m_pChararacter->GetParams().arrive_radius)
@@ -34,7 +34,9 @@ void ArriveSteering::DrawDebug()
 
 	gfxDevice.SetPenColor(0.0f, 1.0f, 0.0f, 0.5f);
 	MOAIDraw::DrawLine(m_pChararacter->GetLoc(), m_pChararacter->GetLoc() + m_vCurrentAcceleration);
+
 }
+
 ArriveSteering::ArriveSteering(Character* _pCharacter) : m_pChararacter(_pCharacter)
 {
 }

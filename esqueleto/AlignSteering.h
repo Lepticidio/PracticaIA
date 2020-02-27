@@ -9,5 +9,15 @@
 
 class AlignSteering
 {
+	float m_fDesiredAngle;
+	float m_fAngularAcceleration;
+	Character* m_pChararacter;
+public:
+	float m_fMaxAcceleration;
+	float m_fMaxSpeed;
+	AlignSteering (Character* _pCharacter);
+	float GetSteering(float _fTarget);
+	void DrawDebug();
+	void Initialize();
 };
 
