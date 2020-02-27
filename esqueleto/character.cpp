@@ -11,7 +11,7 @@ USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle)
 }
 
 
-Character::Character() : mLinearVelocity(0.0f, 0.0f), mAngularVelocity(0.0f)
+Character::Character() : mLinearVelocity(200.0f, 0.0f), mAngularVelocity(0.0f)
 {
 	RTTI_BEGIN
 		RTTI_EXTEND(MOAIEntity2D)
@@ -40,7 +40,14 @@ void Character::OnUpdate(float step)
 {
 	USVec2D vAcceleration = m_pSteering->GetSteering(mParams.targetPosition); 
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
-	vCurrentVelocity.SetLength(mParams.max_velocity);
+	float fDistance = (GetLoc() - mParams.targetPosition).Length();
+
+	float fDistanceFactor = 1;
+	if (fDistance < mParams.arrive_radius)
+	{
+		fDistanceFactor = fDistance / mParams.arrive_radius;
+	}
+	vCurrentVelocity.SetLength(mParams.max_velocity*fDistanceFactor);
 	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
 	SetLoc(GetLoc() + GetLinearVelocity()*step);
 
