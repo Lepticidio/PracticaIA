@@ -5,7 +5,25 @@ float AlignSteering::GetSteering(float _fTarget)
 {
 	float fResult = 0;
 	float fCurrentAngle = m_pChararacter->GetRot();
+	while (_fTarget >= 360 || _fTarget < 0)
+	{
+		if (_fTarget >= 360)
+		{
+			_fTarget -= 360;
+		}
+		else if (_fTarget < 0)
+		{
+			_fTarget += 360;
+		}
 
+	}
+
+	float fAlternateAngle = _fTarget - 360;
+
+	if (abs(fCurrentAngle - fAlternateAngle) < abs(fCurrentAngle - _fTarget))
+	{
+		_fTarget = fAlternateAngle;
+	}
 	m_fDesiredAngle = _fTarget - fCurrentAngle;
 	float fDistance = abs(m_fDesiredAngle);
 	float fDistanceFactor = 1;
@@ -24,10 +42,7 @@ float AlignSteering::GetSteering(float _fTarget)
 			fResult = (fResult / fAbsResult) * m_fMaxAcceleration;
 		}
 		m_fAngularAcceleration = fResult;
-		if (fResult != fResult)
-		{
-			printf("debug");
-		}
+
 	}
 	return fResult;
 }
