@@ -21,6 +21,7 @@
     <ClCompile Include="AlignSteering.cpp" />
     <ClCompile Include="ArriveSteering.cpp" />
     <ClCompile Include="AlignToMovement.cpp" />
+    <ClCompile Include="Path.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -40,6 +41,7 @@
     <ClInclude Include="AlignSteering.h" />
     <ClInclude Include="ArriveSteering.h" />
     <ClInclude Include="AlignToMovement.h" />
+    <ClInclude Include="Path.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">
