@@ -135,6 +135,8 @@
     <ClCompile Include="host\ParticlePresets.cpp" />
     <ClCompile Include="params.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="PathFollowingSteering.cpp" />
+    <ClCompile Include="PursueSteering.cpp" />
     <ClCompile Include="SeekSteering.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -151,6 +153,8 @@
     <ClInclude Include="host\ParticlePresets.h" />
     <ClInclude Include="params.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="PathFollowingSteering.h" />
+    <ClInclude Include="PursueSteering.h" />
     <ClInclude Include="SeekSteering.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

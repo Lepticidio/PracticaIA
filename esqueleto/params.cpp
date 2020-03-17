@@ -78,5 +78,14 @@ bool ReadParams(const char* filename, Params& params)
     if (paramElem)
         paramElem->Attribute("value", &params.targetRotation);
 
+    paramElem = hParams.FirstChildElement("look_ahead").Element();
+    if (paramElem)
+        paramElem->Attribute("value", &params.look_ahead);
+
+    paramElem = hParams.FirstChildElement("time_ahead").Element();
+    if (paramElem)
+        paramElem->Attribute("value", &params.time_ahead);
+
+
     return true;
 }
