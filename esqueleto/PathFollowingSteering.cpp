@@ -5,12 +5,21 @@ PathFollowingSteering::PathFollowingSteering(SeekSteering* _pSeek, Path* _pPath,
 }
 USVec2D PathFollowingSteering::GetSteering()
 {
-	USVec2D vClosestPoint(0, 0);
+	int iClosestIndex = 0;
 	float fClosestDistance = FLT_MAX;
 	for (int i = 0; i < m_pPath->m_tPoints.size(); i++)
 	{
-		//USVec2D vDirectionToPoint = m_pCharacter->GetLoc() 
+		USVec2D vPoint = m_pPath->m_tPoints[i];
+		USVec2D vDirectionToPoint = m_pCharacter->GetLoc() - vPoint;
+		float fDistance = vDirectionToPoint.Length();
+		if ( fDistance < fClosestDistance)
+		{
+			fClosestDistance = fDistance;
+			iClosestIndex = i;
+		}
 	}
+	USVec2D vFirstPoint = m_pPath->m_tPoints[iClosestIndex];
+
 
 	USVec2D vDestination = m_pPath->m_tPoints[m_iCurrentPoint];
 	
