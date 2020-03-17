@@ -55,7 +55,7 @@ void Character::OnUpdate(float step)
 {
 	//USVec2D vAcceleration = m_pSeek->GetSteering(mParams.targetPosition); 
 	//USVec2D vAcceleration = m_pArrive->GetSteering(mParams.targetPosition);
-	
+	/*
 	USVec2D vAcceleration(0, 0);
 	if (m_bIsEnemy)
 	{
@@ -72,7 +72,8 @@ void Character::OnUpdate(float step)
 	{
 		vAcceleration = m_pPursueSteering->GetSteering();
 	}
-	//USVec2D vAcceleration = m_pPathSteering->GetSteering();
+	*/
+	USVec2D vAcceleration = m_pPathSteering->GetSteering();
 	//USVec2D vAcceleration (0,0);
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
 	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
@@ -105,7 +106,7 @@ void Character::DrawDebug()
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
 	//m_pSeek->DrawDebug();
 	m_pArrive->DrawDebug();
-	//m_pPath->DrawDebug();
+	m_pPath->DrawDebug();
 	gfxDevice.SetPenColor(1.0f, 1.0f, 0.0f, 0.5f);
 	MOAIDraw::DrawLine(GetLoc(), GetLoc() + GetLinearVelocity());
 }

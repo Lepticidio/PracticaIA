@@ -7,7 +7,7 @@ viewport:setScale (1024, -768)
 layer = MOAILayer2D.new()
 layer:setViewport(viewport)
 MOAISim.pushRenderPass(layer)
-
+--[[
 --Texture of enemy character
 texture_name = "mago.png"
 gfxQuad = MOAIGfxQuad2D.new()
@@ -51,13 +51,37 @@ entity:setLoc(0, 0)
 entity:setRot(0)
 entity:setLinearVel(100, 0)
 --entity:setAngularVel(30)
+]]
+
+--Texture of player character
+texture_name = "dragon.png"
+gfxQuad = MOAIGfxQuad2D.new()
+gfxQuad:setTexture(texture_name)
+char_size = 64
+gfxQuad:setRect(-char_size/2, -char_size/2, char_size/2, char_size/2)
+gfxQuad:setUVRect(0, 0, 1, 1)
+
+prop = MOAIProp2D.new()
+prop:setDeck(gfxQuad)
+
+entity = Character.new()
+-- Add prop to be the renderable for this character
+entity:setProp(prop, layer)
+entity:checkIsEnemy(false, enemy);
+-- Start the character (allow calls to OnUpdate)
+entity:start()
+entity:setLoc(0, 0)
+entity:setRot(0)
+entity:setLinearVel(100, 0)
+--entity:setAngularVel(30)
+
 
 -- Enable Debug Draw
 debug = MOAIDrawDebug.get();
 layer:setDrawDebug(debug)
 -- Add this character to draw debug
 MOAIDrawDebug.insertEntity(entity)
-MOAIDrawDebug.insertEntity(enemy);
+--MOAIDrawDebug.insertEntity(enemy);
 
 mouseX = 0
 mouseY = 0
