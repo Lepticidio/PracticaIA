@@ -20,6 +20,11 @@ USVec2D PathFollowingSteering::GetSteering()
 	}
 	USVec2D vFirstPoint = m_pPath->m_tPoints[iClosestIndex];
 
+	if (iClosestIndex == 0)
+	{
+
+	}
+
 
 	USVec2D vDestination = m_pPath->m_tPoints[m_iCurrentPoint];
 	
