@@ -70,7 +70,7 @@ entity:setProp(prop, layer)
 entity:checkIsEnemy(false, enemy);
 -- Start the character (allow calls to OnUpdate)
 entity:start()
-entity:setLoc(0, 0)
+entity:setLoc(-100, -100)
 entity:setRot(0)
 entity:setLinearVel(100, 0)
 --entity:setAngularVel(30)

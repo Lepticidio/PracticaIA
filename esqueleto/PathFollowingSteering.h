@@ -4,7 +4,10 @@
 class PathFollowingSteering
 {
 protected:
-	int m_iCurrentPoint = 0;
+
+
+	USVec2D m_vClosestPoint = USVec2D(0, 0);
+	USVec2D m_vDestination = USVec2D(0, 0);
 	float m_fLookAhead = 0;
 	float m_fTimeAhead = 0;
 	float m_fDestinationRadius = 0;
@@ -15,5 +18,6 @@ public:
 	PathFollowingSteering(SeekSteering* _pSeek, Path* _pPath, Character* _pCharacter);
 	USVec2D GetSteering();
 	void Initialize();
+	void DrawDebug();
 };
 
