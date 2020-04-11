@@ -11,6 +11,8 @@ class AlignToMovement;
 class PathFollowingSteering;
 class Path;
 class PursueSteering;
+class Obstacles;
+class ObstacleAvoidanceSteering;
 class Character: public MOAIEntity2D
 {
 public:
@@ -51,6 +53,8 @@ private:
 	PursueSteering* m_pPursueSteering;
 	PathFollowingSteering* m_pPathSteering;
 	Path* m_pPath;
+	Obstacles* m_pObstacles;
+	ObstacleAvoidanceSteering* m_pObstacleAvoidance;
 	std::string m_sParamsName;
 	bool m_bIsEnemy = false;
 	

@@ -1,5 +1,5 @@
 #pragma once
-#include "SeekSteering.h"
+#include "ObstacleAvoidanceSteering.h"
 #include "Path.h"
 class PathFollowingSteering
 {
@@ -16,6 +16,8 @@ public:
 	SeekSteering* m_pSeek;
 	Path* m_pPath;
 	PathFollowingSteering(SeekSteering* _pSeek, Path* _pPath, Character* _pCharacter);
+	PathFollowingSteering(ObstacleAvoidanceSteering* _pObstacle, Path* _pPath, Character* _pCharacter);
+	ObstacleAvoidanceSteering* m_pObstacleAvoidance;
 	USVec2D GetSteering();
 	void Initialize();
 	void DrawDebug();

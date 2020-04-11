@@ -6,7 +6,6 @@
 #include "PathFollowingSteering.h"
 #include "PursueSteering.h"
 #include "AlignToMovement.h"
-#include "PathFollowingSteering.h"
 
 
 USVec2D RotateVector(USVec2D _vInitialVector, float _fAngle)
@@ -24,10 +23,14 @@ Character::Character() : mLinearVelocity(00.0f, 0.0f), mAngularVelocity(0.0f)
 		m_pArrive = new ArriveSteering(this);
 		m_pAlign = new AlignSteering(this);
 		m_pAlignToMovement = new AlignToMovement(this, m_pAlign);
+		const char* sObstaclesName = "obstacles.xml";
+		m_pObstacles = new Obstacles(sObstaclesName);
 		const char* sPathName = "path.xml";
 		m_pPath = new Path(sPathName);
-		m_pPathSteering = new PathFollowingSteering(m_pSeek, m_pPath, this);
+		//m_pPathSteering = new PathFollowingSteering(m_pSeek, m_pPath, this);
 		m_pPursueSteering = new PursueSteering(m_pArrive, this);
+		m_pObstacleAvoidance = new ObstacleAvoidanceSteering(m_pSeek, m_pObstacles, this);
+		m_pPathSteering = new PathFollowingSteering(m_pObstacleAvoidance, m_pPath, this);
 }
 
 Character::~Character()
@@ -42,6 +45,7 @@ void Character::OnStart()
 	m_pArrive->Initialize();
 	m_pAlign->Initialize();
 	m_pPathSteering->Initialize();
+	m_pObstacleAvoidance->Initialize();
 	m_vRandomPos = USVec2D(Rand() * 1024.0f - 512, Rand() * 768.0f - 384);
 }
 
@@ -75,6 +79,7 @@ void Character::OnUpdate(float step)
 	*/
 	USVec2D vAcceleration = m_pPathSteering->GetSteering();
 	//USVec2D vAcceleration (0,0);
+	//USVec2D vAcceleration = m_pObstacleAvoidance->GetSteering(mParams.targetPosition); 
 	USVec2D vCurrentVelocity = GetLinearVelocity() + vAcceleration * step;
 	SetLinearVelocity(vCurrentVelocity.mX, vCurrentVelocity.mY);
 	SetLoc(GetLoc() + GetLinearVelocity()*step);
@@ -104,10 +109,11 @@ void Character::OnUpdate(float step)
 void Character::DrawDebug()
 {
 	MOAIGfxDevice& gfxDevice = MOAIGfxDevice::Get();
-	//m_pSeek->DrawDebug();
-	m_pArrive->DrawDebug();
+	m_pSeek->DrawDebug();
+	//m_pArrive->DrawDebug();
 	m_pPathSteering->DrawDebug();
 	m_pPath->DrawDebug();
+	m_pObstacles->DrawDebug();
 	gfxDevice.SetPenColor(1.0f, 1.0f, 0.0f, 0.5f);
 	MOAIDraw::DrawLine(GetLoc(), GetLoc() + GetLinearVelocity());
 }

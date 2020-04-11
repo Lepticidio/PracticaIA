@@ -24,6 +24,10 @@ USVec2D ClosestPointInSegment(USVec2D _vASegment, USVec2D _vBSegment, USVec2D _v
 PathFollowingSteering::PathFollowingSteering(SeekSteering* _pSeek, Path* _pPath, Character* _pCharacter) : m_pSeek(_pSeek), m_pPath(_pPath), m_pCharacter(_pCharacter)
 {
 }
+
+PathFollowingSteering::PathFollowingSteering(ObstacleAvoidanceSteering* _pObstacle, Path* _pPath, Character* _pCharacter) : m_pObstacleAvoidance(_pObstacle), m_pPath(_pPath), m_pCharacter(_pCharacter)
+{
+}
 USVec2D PathFollowingSteering::GetSteering()
 {
 	int iClosestDestPointIndex = 1;
@@ -64,7 +68,14 @@ USVec2D PathFollowingSteering::GetSteering()
 			 break;
 		}
 	}
-	return m_pSeek->GetSteering(m_vDestination);
+	if (m_pObstacleAvoidance != nullptr)
+	{
+		return m_pObstacleAvoidance->GetSteering(m_vDestination);
+	}
+	else
+	{
+		return m_pSeek->GetSteering(m_vDestination);
+	}
 }
 
 void PathFollowingSteering::DrawDebug()

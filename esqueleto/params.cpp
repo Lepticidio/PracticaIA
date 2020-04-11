@@ -86,6 +86,10 @@ bool ReadParams(const char* filename, Params& params)
     if (paramElem)
         paramElem->Attribute("value", &params.time_ahead);
 
+    paramElem = hParams.FirstChildElement("character_radius").Element();
+    if (paramElem)
+        paramElem->Attribute("value", &params.character_radius);
+
 
     return true;
 }

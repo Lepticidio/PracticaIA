@@ -133,6 +133,8 @@
     <ClCompile Include="host\GlutHost.cpp" />
     <ClCompile Include="host\GlutHostMain.cpp" />
     <ClCompile Include="host\ParticlePresets.cpp" />
+    <ClCompile Include="ObstacleAvoidanceSteering.cpp" />
+    <ClCompile Include="Obstacles.cpp" />
     <ClCompile Include="params.cpp" />
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="PathFollowingSteering.cpp" />
@@ -151,6 +153,8 @@
     <ClInclude Include="host\FolderWatcher-win.h" />
     <ClInclude Include="host\GlutHost.h" />
     <ClInclude Include="host\ParticlePresets.h" />
+    <ClInclude Include="ObstacleAvoidanceSteering.h" />
+    <ClInclude Include="Obstacles.h" />
     <ClInclude Include="params.h" />
     <ClInclude Include="Path.h" />
     <ClInclude Include="PathFollowingSteering.h" />

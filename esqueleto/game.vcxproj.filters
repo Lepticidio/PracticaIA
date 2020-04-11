@@ -24,6 +24,8 @@
     <ClCompile Include="Path.cpp" />
     <ClCompile Include="PathFollowingSteering.cpp" />
     <ClCompile Include="PursueSteering.cpp" />
+    <ClCompile Include="Obstacles.cpp" />
+    <ClCompile Include="ObstacleAvoidanceSteering.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
@@ -46,6 +48,8 @@
     <ClInclude Include="Path.h" />
     <ClInclude Include="PathFollowingSteering.h" />
     <ClInclude Include="PursueSteering.h" />
+    <ClInclude Include="Obstacles.h" />
+    <ClInclude Include="ObstacleAvoidanceSteering.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="host">
