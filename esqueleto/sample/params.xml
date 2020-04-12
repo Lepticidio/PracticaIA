@@ -15,6 +15,6 @@
 	    <look_ahead value="80"></look_ahead>
 	    <time_ahead value="4"></time_ahead>
 
-	    <character_radius value="30"> </arrive_radius>
+	    <character_radius value="30"> </character_radius>
 	</params>
 </root>
